@@ -24,6 +24,11 @@ push: build
 	echo "$(DOCKER_PASSWORD)" | docker login -u $(DOCKER_USERNAME) --password-stdin
 	for image in $(IMAGES) ; do \
 	    docker push $$image ; \
+	    name=$${image%:*} fulltag=$${image#*:} ; \
+	    for tag in $${fulltag%.*} $${fulltag%%.*} latest ; do \
+	        docker tag $$image $$name:$$tag ; \
+	        docker push $$name:$$tag ; \
+	    done ; \
 	done
 
 .PHONY: all build build-openssl build-curl build-git build-python3 push
