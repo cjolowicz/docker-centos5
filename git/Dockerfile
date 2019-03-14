@@ -20,3 +20,5 @@ RUN curl https://mirrors.edge.kernel.org/pub/software/scm/git/git-$GIT_VERSION.t
     make install && \
     cd .. && \
     rm -rf git-$GIT_VERSION git-$GIT_VERSION.tar.gz
+
+CMD ["git"]

@@ -79,3 +79,5 @@ RUN tar -xf curl-$CURL_VERSION.tar.gz && \
     make install && \
     cd .. && \
     rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz
+
+CMD ["openssl"]

@@ -34,3 +34,5 @@ RUN curl https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSIO
     make install && \
     cd .. && \
     rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz
+
+CMD ["python3"]
