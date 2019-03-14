@@ -3,4 +3,3 @@
 #
 
 FROM cjolowicz/openssl-centos5:1.1.0j
-

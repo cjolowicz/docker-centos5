@@ -12,6 +12,10 @@
 
 FROM astj/centos5-vault
 
+ENV PERL_VERSION 5.28.1
+ENV OPENSSL_VERSION 1.1.0j
+ENV CURL_VERSION 7.64.0
+
 # We will be building packages from source.
 WORKDIR /usr/local/src
 
@@ -25,9 +29,9 @@ WORKDIR /usr/local/src
 RUN echo "multilib_policy=best" >> /etc/yum.conf && \
     rpm -i http://www.tuxad.de/repo/5/tuxad.rpm && \
     yum update -y && yum install -y curl && \
-    curl --insecure http://www.cpan.org/src/5.0/perl-5.28.1.tar.gz -LO && \
-    curl --insecure https://www.openssl.org/source/openssl-1.1.0j.tar.gz -LO && \
-    curl --insecure https://curl.haxx.se/download/curl-7.64.0.tar.gz -LO && \
+    curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO && \
+    curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO && \
+    curl --insecure https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz -LO && \
     yum remove -y curl openssl1 && \
     rpm --erase tuxad-release-5-7
 
@@ -42,17 +46,17 @@ RUN yum install -y \
 
 # Install Perl from source.
 # OpenSSL requires >= 5.10.0, repositories have 5.8.8.
-RUN tar -xf perl-5.28.1.tar.gz && \
-    cd perl-5.28.1 && \
+RUN tar -xf perl-$PERL_VERSION.tar.gz && \
+    cd perl-$PERL_VERSION && \
     ./Configure -des && \
     make && \
     make install && \
     cd .. && \
-    rm -rf perl-5.28.1 perl-5.28.1.tar.gz
+    rm -rf perl-$PERL_VERSION perl-$PERL_VERSION.tar.gz
 
 # Install OpenSSL from source.
-RUN tar -xf openssl-1.1.0j.tar.gz && \
-    cd openssl-1.1.0j && \
+RUN tar -xf openssl-$OPENSSL_VERSION.tar.gz && \
+    cd openssl-$OPENSSL_VERSION && \
     ./config \
         --prefix=/usr/local/ssl \
         --openssldir=/usr/local/ssl \
@@ -61,14 +65,14 @@ RUN tar -xf openssl-1.1.0j.tar.gz && \
     make && \
     make install && \
     cd .. && \
-    rm -rf openssl-1.1.0j openssl-1.1.0j.tar.gz
+    rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz
 
 ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
 
-RUN tar -xf curl-7.64.0.tar.gz && \
-    cd curl-7.64.0 && \
+RUN tar -xf curl-$CURL_VERSION.tar.gz && \
+    cd curl-$CURL_VERSION && \
     LDFLAGS=-Wl,-R/usr/local/ssl/lib ./configure --with-ssl=/usr/local/ssl && \
     make && \
     make install && \
     cd .. && \
-    rm -rf curl-7.64.0 curl-7.64.0.tar.gz
+    rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz

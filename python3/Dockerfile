@@ -4,6 +4,8 @@
 
 FROM cjolowicz/curl-centos5:7.64.0
 
+ENV PYTHON_VERSION 3.6.8
+
 # Install pre-requisites.
 RUN yum update -y && yum install -y \
     bzip2 \
@@ -21,9 +23,9 @@ RUN yum update -y && yum install -y \
 # https://stackoverflow.com/questions/5937337/building-python-with-ssl-support-in-non-standard-location
 COPY use-local-openssl.patch .
 
-RUN curl https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz -LO && \
-    tar -xf Python-3.6.8.tgz && \
-    cd /usr/local/src/Python-3.6.8 && \
+RUN curl https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz -LO && \
+    tar -xf Python-$PYTHON_VERSION.tgz && \
+    cd /usr/local/src/Python-$PYTHON_VERSION && \
     patch -p1 < ../use-local-openssl.patch && \
     ./configure --with-ensurepip=install \
     CPPFLAGS="$(pkg-config --cflags openssl) -Wl,-R/usr/local/ssl/lib" \
@@ -31,4 +33,4 @@ RUN curl https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz -LO && \
     make && \
     make install && \
     cd .. && \
-    rm -rf Python-3.6.8 Python-3.6.8.tgz
+    rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz
