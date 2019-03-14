@@ -19,6 +19,9 @@ ENV CURL_VERSION 7.64.0
 # We will be building packages from source.
 WORKDIR /usr/local/src
 
+# Ensure our tools are preferred over distribution tools.
+ENV PATH /usr/local/bin:$PATH
+
 # Download sources. The tuxad repository is needed to install curl
 # with TLS 1.2 support. Most sites won't settle for any less.  After
 # download, remove the repository.
