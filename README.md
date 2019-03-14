@@ -8,7 +8,7 @@ in /usr/local/ssl, and some tools built against it:
 - https://hub.docker.com/r/cjolowicz/openssl-centos5 (OpenSSL 1.1.0j)
 - https://hub.docker.com/r/cjolowicz/curl-centos5 (Curl 7.64.0)
 - https://hub.docker.com/r/cjolowicz/git-centos5 (Git 2.21.0)
-- https://hub.docker.com/r/cjolowicz/python3-centos5 (Python 3.6.8)
+- https://hub.docker.com/r/cjolowicz/python-centos5 (Python 3.6.8)
 
 On March 31, 2017, support of CentOS 5 has ended. The CentOS 5
 official image have two issues that prevent them from talking to the
