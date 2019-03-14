@@ -2,7 +2,7 @@
 # Docker Image for Git 2.21.0 on Centos 5
 #
 
-FROM cjolowicz/curl:7.64.0-centos5
+FROM cjolowicz/curl-centos5:7.64.0
 
 RUN yum update -y && yum install -y \
     expat-devel \
