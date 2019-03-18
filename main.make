@@ -1,7 +1,7 @@
 all: build
 
-build: Dockerfile
-	docker build -t $(IMAGE) .
+build: Dockerfile.m4
+	m4 -P Dockerfile.m4 | docker build -f - -t $(IMAGE) .
 
 tag: build
 	image=$(IMAGE) ; \
