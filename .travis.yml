@@ -3,4 +3,4 @@ language: bash
 services:
   - docker
 
-script: make push
+script: make login push

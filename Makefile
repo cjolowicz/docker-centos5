@@ -21,7 +21,6 @@ build-python: build-curl python/Dockerfile python/use-local-openssl.patch
 	docker build -t $(PYTHON) python
 
 push: build
-	echo "$(DOCKER_PASSWORD)" | docker login -u $(DOCKER_USERNAME) --password-stdin
 	for image in $(IMAGES) ; do \
 	    docker push $$image ; \
 	    name=$${image%:*} fulltag=$${image#*:} ; \
@@ -30,5 +29,8 @@ push: build
 	        docker push $$name:$$tag ; \
 	    done ; \
 	done
+
+login:
+	echo "$(DOCKER_PASSWORD)" | docker login -u $(DOCKER_USERNAME) --password-stdin
 
 .PHONY: all build build-openssl build-curl build-git build-python push
