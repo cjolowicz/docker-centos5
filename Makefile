@@ -8,6 +8,12 @@ build:
 	    $(MAKE) -C $$dir build ; \
 	done
 
+tag:
+	set -ex; \
+	for dir in $(DIRS) ; do \
+	    $(MAKE) -C $$dir tag ; \
+	done
+
 push:
 	set -ex; \
 	for dir in $(DIRS) ; do \
