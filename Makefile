@@ -4,7 +4,6 @@ ARCHS = x86_64 i386
 all: build
 
 build:
-	set -ex; \
 	for dir in $(DIRS) ; do \
 	    for arch in $(ARCHS) ; do \
 	        $(MAKE) -C $$dir ARCH=$$arch build ; \
@@ -12,7 +11,6 @@ build:
 	done
 
 tag:
-	set -ex; \
 	for dir in $(DIRS) ; do \
 	    for arch in $(ARCHS) ; do \
 	        $(MAKE) -C $$dir ARCH=$$arch tag ; \
@@ -20,7 +18,6 @@ tag:
 	done
 
 push:
-	set -ex; \
 	for dir in $(DIRS) ; do \
 	    for arch in $(ARCHS) ; do \
 	        $(MAKE) -C $$dir ARCH=$$arch push ; \
