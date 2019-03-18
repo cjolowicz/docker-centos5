@@ -5,10 +5,12 @@
 These Docker images provide Centos 5.11 with OpenSSL 1.1.0j installed
 in /usr/local/ssl, and some tools built against it:
 
-- https://hub.docker.com/r/cjolowicz/openssl-centos5-x86_64 (OpenSSL 1.1.0j)
-- https://hub.docker.com/r/cjolowicz/curl-centos5-x86_64 (Curl 7.64.0)
-- https://hub.docker.com/r/cjolowicz/git-centos5-x86_64 (Git 2.21.0)
-- https://hub.docker.com/r/cjolowicz/python-centos5-x86_64 (Python 3.6.8)
+| Package | Images |
+|---|---|
+| OpenSSL 1.1.0j | [cjolowicz/openssl-centos5-x86_64](https://hub.docker.com/r/cjolowicz/openssl-centos5-x86_64)<br>[cjolowicz/openssl-centos5-i386](https://hub.docker.com/r/cjolowicz/openssl-centos5-i386) |
+| Curl 7.64.0 | [cjolowicz/curl-centos5-x86_64](https://hub.docker.com/r/cjolowicz/curl-centos5-x86_64)<br>[cjolowicz/curl-centos5-i386](https://hub.docker.com/r/cjolowicz/curl-centos5-i386) |
+| Git 2.21.0 | [cjolowicz/git-centos5-x86_64](https://hub.docker.com/r/cjolowicz/git-centos5-x86_64)<br>[cjolowicz/git-centos5-i386](https://hub.docker.com/r/cjolowicz/git-centos5-i386) |
+| Python 3.6.8 | [cjolowicz/python-centos5-x86_64](https://hub.docker.com/r/cjolowicz/python-centos5-x86_64)<br>[cjolowicz/python-centos5-i386](https://hub.docker.com/r/cjolowicz/python-centos5-i386) |
 
 On March 31, 2017, support of CentOS 5 has ended. The CentOS 5
 official image have two issues that prevent them from talking to the
