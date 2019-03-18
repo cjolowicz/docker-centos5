@@ -4,18 +4,14 @@ build: Dockerfile.m4
 	m4 -P Dockerfile.m4 | docker build -f - -t $(IMAGE) .
 
 tag: build
-	image=$(IMAGE) ; \
-	name=$${image%:*} fulltag=$${image#*:} ; \
-	for tag in $${fulltag%.*} $${fulltag%%.*} latest ; do \
-	    docker tag $$image $$name:$$tag ; \
+	for tag in $(TAGS) ; do \
+	    docker tag $(IMAGE) $(IMAGE):$$tag ; \
 	done
 
 push: tag
-	image=$(IMAGE) ; \
-	docker push $$image ; \
-	name=$${image%:*} fulltag=$${image#*:} ; \
-	for tag in $${fulltag%.*} $${fulltag%%.*} latest ; do \
-	    docker push $$name:$$tag ; \
+	docker push $(IMAGE) ; \
+	for tag in $(TAGS) ; do \
+	    docker push $(IMAGE):$$tag ; \
 	done
 
 .PHONY: all build tag push
