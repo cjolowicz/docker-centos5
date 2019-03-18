@@ -1,7 +1,7 @@
 all: build
 
 build: Dockerfile.m4
-	m4 -P -D ARCH=$(ARCH) REPO=$(DOCKER_USERNAME) Dockerfile.m4 | \
+	m4 -P -D ARCH=$(ARCH) -D REPO=$(REPO) Dockerfile.m4 | \
 	    docker build -f - -t $(IMAGE) .
 
 tag: build
