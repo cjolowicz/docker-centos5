@@ -15,8 +15,7 @@ push: tag
 	docker push $$image ; \
 	name=$${image%:*} fulltag=$${image#*:} ; \
 	for tag in $${fulltag%.*} $${fulltag%%.*} latest ; do \
-	    docker tag $$image $$name:$$tag ; \
 	    docker push $$name:$$tag ; \
 	done
 
-.PHONY: all build push
+.PHONY: all build tag push
