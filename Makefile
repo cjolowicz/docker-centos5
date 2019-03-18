@@ -1,23 +1,30 @@
 DIRS = openssl curl python git
+ARCHS = x86_64
 
 all: build
 
 build:
 	set -ex; \
 	for dir in $(DIRS) ; do \
-	    $(MAKE) -C $$dir build ; \
+	    for arch in $(ARCHS) ; do \
+	        $(MAKE) -C $$dir ARCH=$$arch build ; \
+	    done ; \
 	done
 
 tag:
 	set -ex; \
 	for dir in $(DIRS) ; do \
-	    $(MAKE) -C $$dir tag ; \
+	    for arch in $(ARCHS) ; do \
+	        $(MAKE) -C $$dir ARCH=$$arch tag ; \
+	    done ; \
 	done
 
 push:
 	set -ex; \
 	for dir in $(DIRS) ; do \
-	    $(MAKE) -C $$dir push ; \
+	    for arch in $(ARCHS) ; do \
+	        $(MAKE) -C $$dir ARCH=$$arch push ; \
+	    done ; \
 	done
 
 login:
