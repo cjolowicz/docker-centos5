@@ -23,6 +23,7 @@ RUN set -ex; \
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf git-$GIT_VERSION git-$GIT_VERSION.tar.gz
+    rm -rf git-$GIT_VERSION git-$GIT_VERSION.tar.gz; \
+    git --version
 
 CMD ["git"]

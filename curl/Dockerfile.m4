@@ -36,6 +36,7 @@ RUN set -ex; \
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz
+    rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz; \
+    /usr/local/bin/curl --version
 
 CMD ["curl"]

@@ -78,7 +78,8 @@ RUN set -ex; \
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz
+    rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz; \
+    $OPENSSL_DIR/bin/openssl version -a
 
 ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
 

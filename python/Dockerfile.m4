@@ -37,6 +37,7 @@ RUN set -ex;
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz
+    rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz; \
+    python3 --version
 
 CMD ["python3"]
