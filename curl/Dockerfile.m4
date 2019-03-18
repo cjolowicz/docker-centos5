@@ -28,6 +28,7 @@ RUN set -ex; \
 
 RUN set -ex; \
     tar -xf curl-$CURL_VERSION.tar.gz; \
+    rm -f curl-$CURL_VERSION.tar.gz; \
     cd curl-$CURL_VERSION; \
     LDFLAGS=-Wl,-R/usr/local/ssl/lib \
     ./configure \
@@ -36,7 +37,7 @@ RUN set -ex; \
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz; \
+    rm -rf curl-$CURL_VERSION; \
     /usr/local/bin/curl --version
 
 CMD ["curl"]

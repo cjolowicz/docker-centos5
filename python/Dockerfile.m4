@@ -29,6 +29,7 @@ COPY use-local-openssl.patch .
 RUN set -ex;
     curl https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz -LO; \
     tar -xf Python-$PYTHON_VERSION.tgz; \
+    rm -f Python-$PYTHON_VERSION.tgz; \
     cd /usr/local/src/Python-$PYTHON_VERSION; \
     patch -p1 < ../use-local-openssl.patch; \
     ./configure --with-ensurepip=install \
@@ -37,7 +38,7 @@ RUN set -ex;
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz; \
+    rm -rf Python-$PYTHON_VERSION; \
     python3 --version
 
 CMD ["python3"]

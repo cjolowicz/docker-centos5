@@ -65,6 +65,7 @@ RUN set -ex; \
 # Install OpenSSL from source.
 RUN set -ex; \
     tar -xf openssl-$OPENSSL_VERSION.tar.gz; \
+    rm -f openssl-$OPENSSL_VERSION.tar.gz; \
     cd openssl-$OPENSSL_VERSION; \
     m4_ifelse(
         ARCH, `x86_64',
@@ -78,7 +79,7 @@ RUN set -ex; \
     make -j $(nproc); \
     make install; \
     cd ..; \
-    rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz; \
+    rm -rf openssl-$OPENSSL_VERSION; \
     $OPENSSL_DIR/bin/openssl version -a
 
 ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
