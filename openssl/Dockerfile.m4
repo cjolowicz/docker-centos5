@@ -1,3 +1,4 @@
+m4_define(YUM, m4_ifelse(ARCH, `x86_64', `yum', ARCH, `i386', `linux32 yum'))m4_dnl
 #
 # Docker Image for OpenSSL 1.1.0j on Centos 5
 #
@@ -33,24 +34,24 @@ RUN set -ex; \
         ARCH, `i386',
         `http://www.tuxad.com/rpms/tuxad-release-5-1.noarch.rpm',
     ); \
-    yum update -y; \
-    yum install -y curl; \
+    YUM update -y; \
+    YUM install -y curl; \
     curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO; \
     curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO; \
-    yum remove -y curl openssl1; \
+    YUM remove -y curl openssl1; \
     rpm --erase m4_ifelse(ARCH, `x86_64', `tuxad-release-5-7', ARCH, `i386', `tuxad-release'); \
-    yum clean all
+    YUM clean all
 
 # Install pre-requisites.
 RUN set -ex; \
-    yum update -y; \
-    yum install -y \
+    YUM update -y; \
+    YUM install -y \
         gcc \
         make \
         openldap-devel \
         zlib-devel \
     ; \
-    yum clean all
+    YUM clean all
 
 # Install Perl from source.
 # OpenSSL requires >= 5.10.0, repositories have 5.8.8.

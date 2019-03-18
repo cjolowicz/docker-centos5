@@ -1,3 +1,4 @@
+m4_define(YUM, m4_ifelse(ARCH, `x86_64', `yum', ARCH, `i386', `linux32 yum'))m4_dnl
 #
 # Docker Image for Python 3.6.8 on Centos 5
 #
@@ -6,8 +7,8 @@ FROM REPO/curl-centos5-ARCH:7.64.0
 
 # Install pre-requisites.
 RUN set -ex; \
-    yum update -y; \
-    yum install -y \
+    YUM update -y; \
+    YUM install -y \
         bzip2 \
         bzip2-devel \
         findutils \
@@ -19,7 +20,7 @@ RUN set -ex; \
         xz-devel \
         zlib-devel \
     ; \
-    yum clean all
+    YUM clean all
 
 ENV PYTHON_VERSION 3.6.8
 
