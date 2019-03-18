@@ -40,4 +40,5 @@ RUN set -ex; \
     rm -rf curl-$CURL_VERSION; \
     /usr/local/bin/curl --version
 
-CMD ["curl"]
+ENTRYPOINT ["curl"]
+CMD ["--help"]

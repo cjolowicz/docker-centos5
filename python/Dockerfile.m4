@@ -41,4 +41,4 @@ RUN set -ex;
     rm -rf Python-$PYTHON_VERSION; \
     python3 --version
 
-CMD ["python3"]
+ENTRYPOINT ["python3"]

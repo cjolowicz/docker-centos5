@@ -84,4 +84,4 @@ RUN set -ex; \
 
 ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
 
-CMD ["openssl"]
+ENTRYPOINT ["openssl"]

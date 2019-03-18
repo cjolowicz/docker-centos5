@@ -27,4 +27,4 @@ RUN set -ex; \
     rm -rf git-$GIT_VERSION; \
     git --version
 
-CMD ["git"]
+ENTRYPOINT ["git"]
