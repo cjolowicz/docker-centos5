@@ -20,7 +20,7 @@ RUN set -ex; \
     tar -xf git-$GIT_VERSION.tar.gz; \
     rm -f git-$GIT_VERSION.tar.gz; \
     cd git-$GIT_VERSION; \
-    ./configure --with-openssl=/usr/local/ssl --with-curl=/usr/local; \
+    ./configure --with-openssl=$OPENSSL_DIR --with-curl=/usr/local; \
     make -j $(nproc); \
     make install; \
     cd ..; \

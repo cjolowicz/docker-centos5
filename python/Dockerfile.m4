@@ -33,8 +33,8 @@ RUN set -ex;
     cd /usr/local/src/Python-$PYTHON_VERSION; \
     patch -p1 < ../use-local-openssl.patch; \
     ./configure --with-ensurepip=install \
-    CPPFLAGS="$(pkg-config --cflags openssl) -Wl,-R/usr/local/ssl/lib" \
-    LDFLAGS="$(pkg-config --libs openssl) -Wl,-R/usr/local/ssl/lib"; \
+    CPPFLAGS="$(pkg-config --cflags openssl) -Wl,-R$OPENSSL_DIR/lib" \
+    LDFLAGS="$(pkg-config --libs openssl) -Wl,-R$OPENSSL_DIR/lib"; \
     make -j $(nproc); \
     make install; \
     cd ..; \

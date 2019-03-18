@@ -30,9 +30,9 @@ RUN set -ex; \
     tar -xf curl-$CURL_VERSION.tar.gz; \
     rm -f curl-$CURL_VERSION.tar.gz; \
     cd curl-$CURL_VERSION; \
-    LDFLAGS=-Wl,-R/usr/local/ssl/lib \
+    LDFLAGS=-Wl,-R$OPENSSL_DIR/lib \
     ./configure \
-        --with-ssl=/usr/local/ssl \
+        --with-ssl=$OPENSSL_DIR \
         m4_ifelse(ARCH, `i386', `--host=i686-pc-linux-gnu CFLAGS=-m32'); \
     make -j $(nproc); \
     make install; \

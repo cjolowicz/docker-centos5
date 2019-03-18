@@ -18,6 +18,7 @@ FROM m4_ifelse(
 
 ENV PERL_VERSION 5.28.1
 ENV OPENSSL_VERSION 1.1.0j
+ENV OPENSSL_DIR /usr/local/ssl
 
 # We will be building packages from source.
 WORKDIR /usr/local/src
@@ -72,16 +73,16 @@ RUN set -ex; \
         `./config',
         ARCH, `i386',
         `./Configure -m32 linux-generic32') \
-        --prefix=/usr/local/ssl \
-        --openssldir=/usr/local/ssl \
+        --prefix=$OPENSSL_DIR \
+        --openssldir=$OPENSSL_DIR \
         shared zlib no-async enable-egd \
-        -Wl,-rpath,/usr/local/ssl/lib; \
+        -Wl,-rpath,$OPENSSL_DIR/lib; \
     make -j $(nproc); \
     make install; \
     cd ..; \
     rm -rf openssl-$OPENSSL_VERSION; \
     $OPENSSL_DIR/bin/openssl version -a
 
-ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
+ENV PKG_CONFIG_PATH $OPENSSL_DIR/lib/pkgconfig
 
 ENTRYPOINT ["openssl"]
