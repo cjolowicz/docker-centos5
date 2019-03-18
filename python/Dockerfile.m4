@@ -24,9 +24,10 @@ RUN set -ex; \
 ENV PYTHON_VERSION 3.6.8
 
 # https://stackoverflow.com/questions/5937337/building-python-with-ssl-support-in-non-standard-location
-COPY use-local-openssl.patch .
+COPY use-local-openssl.patch /usr/local/src
 
 RUN set -ex;
+    cd /usr/local/src; \
     curl https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz -LO; \
     tar -xf Python-$PYTHON_VERSION.tgz; \
     rm -f Python-$PYTHON_VERSION.tgz; \

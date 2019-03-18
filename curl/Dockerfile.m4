@@ -8,6 +8,7 @@ ENV CURL_VERSION 7.64.0
 
 # Download sources, using tuxad.de's curl for TLS 1.2 support.
 RUN set -ex; \
+    cd /usr/local/src; \
     rpm -i http://www.tuxad.de/repo/5/tuxad.rpm; \
     yum update -y; \
     yum install -y
@@ -27,6 +28,7 @@ RUN set -ex; \
     yum clean all
 
 RUN set -ex; \
+    cd /usr/local/src; \
     tar -xf curl-$CURL_VERSION.tar.gz; \
     rm -f curl-$CURL_VERSION.tar.gz; \
     cd curl-$CURL_VERSION; \

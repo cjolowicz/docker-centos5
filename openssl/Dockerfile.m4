@@ -20,15 +20,13 @@ ENV PERL_VERSION 5.28.1
 ENV OPENSSL_VERSION 1.1.0j
 ENV OPENSSL_DIR /usr/local/ssl
 
-# We will be building packages from source.
-WORKDIR /usr/local/src
-
 # Configure yum's multilib_policy to prevent installation failures.
 # https://serverfault.com/questions/77122/rhel5-forbid-installation-of-i386-packages-on-64-bit-systems
 RUN echo "multilib_policy=best" >> /etc/yum.conf
 
 # Download sources, using tuxad.de's curl for TLS 1.2 support.
 RUN set -ex; \
+    cd /usr/local/src; \
     rpm -i http://www.tuxad.de/repo/5/tuxad.rpm; \
     yum update -y; \
     yum install -y curl; \
@@ -52,6 +50,7 @@ RUN set -ex; \
 # Install Perl from source.
 # OpenSSL requires >= 5.10.0, repositories have 5.8.8.
 RUN set -ex; \
+    cd /usr/local/src; \
     tar -xf perl-$PERL_VERSION.tar.gz; \
     cd perl-$PERL_VERSION; \
     ./Configure -des; \
@@ -62,6 +61,7 @@ RUN set -ex; \
 
 # Install OpenSSL from source.
 RUN set -ex; \
+    cd /usr/local/src; \
     tar -xf openssl-$OPENSSL_VERSION.tar.gz; \
     rm -f openssl-$OPENSSL_VERSION.tar.gz; \
     cd openssl-$OPENSSL_VERSION; \
