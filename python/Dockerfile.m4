@@ -4,8 +4,6 @@
 
 FROM cjolowicz/curl-centos5-ARCH:7.64.0
 
-ENV PYTHON_VERSION 3.6.8
-
 # Install pre-requisites.
 RUN set -ex; \
     yum update -y; \
@@ -22,6 +20,8 @@ RUN set -ex; \
         zlib-devel \
     ; \
     yum clean all
+
+ENV PYTHON_VERSION 3.6.8
 
 # https://stackoverflow.com/questions/5937337/building-python-with-ssl-support-in-non-standard-location
 COPY use-local-openssl.patch .
