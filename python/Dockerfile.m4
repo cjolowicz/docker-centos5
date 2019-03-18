@@ -2,7 +2,7 @@
 # Docker Image for Python 3.6.8 on Centos 5
 #
 
-FROM cjolowicz/curl-centos5:7.64.0
+FROM cjolowicz/curl-centos5-ARCH:7.64.0
 
 ENV PYTHON_VERSION 3.6.8
 
