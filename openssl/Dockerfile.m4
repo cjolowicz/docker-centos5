@@ -75,7 +75,7 @@ RUN set -ex; \
         shared zlib no-async enable-egd \
         -Wl,-rpath,$OPENSSL_DIR/lib; \
     make -j $(nproc); \
-    make install; \
+    make install_sw; \
     cd ..; \
     rm -rf openssl-$OPENSSL_VERSION; \
     $OPENSSL_DIR/bin/openssl version -a
