@@ -31,10 +31,11 @@ RUN rpm -i http://www.tuxad.de/repo/5/tuxad.rpm && \
     curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO && \
     curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO && \
     yum remove -y curl openssl1 && \
-    rpm --erase tuxad-release-5-7
+    rpm --erase tuxad-release-5-7 && \
+    yum clean all
 
 # Install pre-requisites.
-RUN yum install -y \
+RUN yum update -y && yum install -y \
     gcc \
     make \
     openldap-devel \

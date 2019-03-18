@@ -11,7 +11,8 @@ RUN rpm -i http://www.tuxad.de/repo/5/tuxad.rpm && \
     yum update -y && yum install -y curl && \
     curl --insecure https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz -LO && \
     yum remove -y curl openssl1 && \
-    rpm --erase tuxad-release-5-7
+    rpm --erase tuxad-release-5-7 && \
+    yum clean all
 
 # Install pre-requisites.
 RUN yum install -y \
