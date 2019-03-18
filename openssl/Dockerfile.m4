@@ -52,12 +52,13 @@ RUN set -ex; \
 RUN set -ex; \
     cd /usr/local/src; \
     tar -xf perl-$PERL_VERSION.tar.gz; \
+    rm -f perl-$PERL_VERSION.tar.gz; \
     cd perl-$PERL_VERSION; \
     ./Configure -des; \
     make; \
     make install; \
     cd ..; \
-    rm -rf perl-$PERL_VERSION perl-$PERL_VERSION.tar.gz
+    rm -rf perl-$PERL_VERSION
 
 # Install OpenSSL from source.
 RUN set -ex; \
