@@ -23,9 +23,6 @@ ENV OPENSSL_DIR /usr/local/ssl
 # We will be building packages from source.
 WORKDIR /usr/local/src
 
-# Ensure our tools are preferred over distribution tools.
-ENV PATH /usr/local/bin:$PATH
-
 # Configure yum's multilib_policy to prevent installation failures.
 # https://serverfault.com/questions/77122/rhel5-forbid-installation-of-i386-packages-on-64-bit-systems
 RUN echo "multilib_policy=best" >> /etc/yum.conf
@@ -83,6 +80,7 @@ RUN set -ex; \
     rm -rf openssl-$OPENSSL_VERSION; \
     $OPENSSL_DIR/bin/openssl version -a
 
+ENV PATH $OPENSSL_DIR/bin:$PATH
 ENV PKG_CONFIG_PATH $OPENSSL_DIR/lib/pkgconfig
 
 ENTRYPOINT ["openssl"]
