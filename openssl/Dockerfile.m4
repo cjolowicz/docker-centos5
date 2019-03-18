@@ -27,13 +27,18 @@ RUN echo "multilib_policy=best" >> /etc/yum.conf
 # Download sources, using tuxad.de's curl for TLS 1.2 support.
 RUN set -ex; \
     cd /usr/local/src; \
-    rpm -i http://www.tuxad.de/repo/5/tuxad.rpm; \
+    rpm -i m4_ifelse(
+        ARCH, `x86_64',
+        `http://www.tuxad.de/repo/5/tuxad.rpm',
+        ARCH, `i386',
+        `http://www.tuxad.com/rpms/tuxad-release-5-1.noarch.rpm',
+    ); \
     yum update -y; \
     yum install -y curl; \
     curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO; \
     curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO; \
     yum remove -y curl openssl1; \
-    rpm --erase tuxad-release-5-7; \
+    rpm --erase m4_ifelse(ARCH, `x86_64', `tuxad-release-5-7', ARCH, `i386', `tuxad-release'); \
     yum clean all
 
 # Install pre-requisites.
