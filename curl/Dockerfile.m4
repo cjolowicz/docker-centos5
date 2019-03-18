@@ -2,7 +2,7 @@
 # Docker Image for Curl 7.64.0 on Centos 5
 #
 
-FROM cjolowicz/openssl-centos5-ARCH:1.1.0j
+FROM REPO/openssl-centos5-ARCH:1.1.0j
 
 ENV CURL_VERSION 7.64.0
 

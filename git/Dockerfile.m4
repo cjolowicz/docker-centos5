@@ -2,7 +2,7 @@
 # Docker Image for Git 2.21.0 on Centos 5
 #
 
-FROM cjolowicz/curl-centos5-ARCH:7.64.0
+FROM REPO/curl-centos5-ARCH:7.64.0
 
 RUN set -ex; \
     yum update -y; \

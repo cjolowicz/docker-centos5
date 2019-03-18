@@ -2,7 +2,7 @@
 # Docker Image for Python 3.6.8 on Centos 5
 #
 
-FROM cjolowicz/curl-centos5-ARCH:7.64.0
+FROM REPO/curl-centos5-ARCH:7.64.0
 
 # Install pre-requisites.
 RUN set -ex; \
