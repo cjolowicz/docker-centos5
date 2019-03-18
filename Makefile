@@ -11,7 +11,7 @@ build:
 push:
 	set -ex; \
 	for dir in $(DIRS) ; do \
-	    $(MAKE) -C $$dir build ; \
+	    $(MAKE) -C $$dir push ; \
 	done
 
 login:
