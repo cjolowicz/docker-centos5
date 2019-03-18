@@ -25,7 +25,7 @@ RUN tar -xf curl-$CURL_VERSION.tar.gz && \
     ./configure \
         --with-ssl=/usr/local/ssl \
         m4_ifelse(ARCH, `i386', `--host=i686-pc-linux-gnu CFLAGS=-m32') && \
-    make && \
+    make -j $(nproc) && \
     make install && \
     cd .. && \
     rm -rf curl-$CURL_VERSION curl-$CURL_VERSION.tar.gz

@@ -68,7 +68,7 @@ RUN tar -xf openssl-$OPENSSL_VERSION.tar.gz && \
         --openssldir=/usr/local/ssl \
         shared zlib no-async enable-egd \
         -Wl,-rpath,/usr/local/ssl/lib && \
-    make && \
+    make -j $(nproc) && \
     make install && \
     cd .. && \
     rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz

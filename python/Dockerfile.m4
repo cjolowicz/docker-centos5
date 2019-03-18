@@ -30,7 +30,7 @@ RUN curl https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSIO
     ./configure --with-ensurepip=install \
     CPPFLAGS="$(pkg-config --cflags openssl) -Wl,-R/usr/local/ssl/lib" \
     LDFLAGS="$(pkg-config --libs openssl) -Wl,-R/usr/local/ssl/lib" && \
-    make && \
+    make -j $(nproc) && \
     make install && \
     cd .. && \
     rm -rf Python-$PYTHON_VERSION Python-$PYTHON_VERSION.tgz
