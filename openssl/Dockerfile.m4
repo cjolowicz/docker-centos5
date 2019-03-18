@@ -10,7 +10,11 @@
 #   error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
 #
 
-FROM astj/centos5-vault
+FROM m4_ifelse(
+    ARCH, `x86_64',
+    `astj/centos5-vault',
+    ARCH, `i386',
+    `themattrix/centos5-vault-i386')
 
 ENV PERL_VERSION 5.28.1
 ENV OPENSSL_VERSION 1.1.0j
@@ -55,7 +59,11 @@ RUN tar -xf perl-$PERL_VERSION.tar.gz && \
 # Install OpenSSL from source.
 RUN tar -xf openssl-$OPENSSL_VERSION.tar.gz && \
     cd openssl-$OPENSSL_VERSION && \
-    ./config \
+    m4_ifelse(
+        ARCH, `x86_64',
+        `./config',
+        ARCH, `i386',
+        `./Configure -m32 linux-generic32') \
         --prefix=/usr/local/ssl \
         --openssldir=/usr/local/ssl \
         shared zlib no-async enable-egd \

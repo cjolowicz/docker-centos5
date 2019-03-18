@@ -21,7 +21,10 @@ RUN yum install -y \
 
 RUN tar -xf curl-$CURL_VERSION.tar.gz && \
     cd curl-$CURL_VERSION && \
-    LDFLAGS=-Wl,-R/usr/local/ssl/lib ./configure --with-ssl=/usr/local/ssl && \
+    LDFLAGS=-Wl,-R/usr/local/ssl/lib \
+    ./configure \
+        --with-ssl=/usr/local/ssl \
+        m4_ifelse(ARCH, `i386', `--host=i686-pc-linux-gnu CFLAGS=-m32') && \
     make && \
     make install && \
     cd .. && \
