@@ -30,35 +30,42 @@ ENV PATH /usr/local/bin:$PATH
 RUN echo "multilib_policy=best" >> /etc/yum.conf
 
 # Download sources, using tuxad.de's curl for TLS 1.2 support.
-RUN rpm -i http://www.tuxad.de/repo/5/tuxad.rpm && \
-    yum update -y && yum install -y curl && \
-    curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO && \
-    curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO && \
-    yum remove -y curl openssl1 && \
-    rpm --erase tuxad-release-5-7 && \
+RUN set -ex; \
+    rpm -i http://www.tuxad.de/repo/5/tuxad.rpm; \
+    yum update -y; \
+    yum install -y curl; \
+    curl --insecure http://www.cpan.org/src/5.0/perl-$PERL_VERSION.tar.gz -LO; \
+    curl --insecure https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -LO; \
+    yum remove -y curl openssl1; \
+    rpm --erase tuxad-release-5-7; \
     yum clean all
 
 # Install pre-requisites.
-RUN yum update -y && yum install -y \
-    gcc \
-    make \
-    openldap-devel \
-    zlib-devel \
-    && yum clean all
+RUN set -ex; \
+    yum update -y; \
+    yum install -y \
+        gcc \
+        make \
+        openldap-devel \
+        zlib-devel \
+    ; \
+    yum clean all
 
 # Install Perl from source.
 # OpenSSL requires >= 5.10.0, repositories have 5.8.8.
-RUN tar -xf perl-$PERL_VERSION.tar.gz && \
-    cd perl-$PERL_VERSION && \
-    ./Configure -des && \
-    make && \
-    make install && \
-    cd .. && \
+RUN set -ex; \
+    tar -xf perl-$PERL_VERSION.tar.gz; \
+    cd perl-$PERL_VERSION; \
+    ./Configure -des; \
+    make; \
+    make install; \
+    cd ..; \
     rm -rf perl-$PERL_VERSION perl-$PERL_VERSION.tar.gz
 
 # Install OpenSSL from source.
-RUN tar -xf openssl-$OPENSSL_VERSION.tar.gz && \
-    cd openssl-$OPENSSL_VERSION && \
+RUN set -ex; \
+    tar -xf openssl-$OPENSSL_VERSION.tar.gz; \
+    cd openssl-$OPENSSL_VERSION; \
     m4_ifelse(
         ARCH, `x86_64',
         `./config',
@@ -67,10 +74,10 @@ RUN tar -xf openssl-$OPENSSL_VERSION.tar.gz && \
         --prefix=/usr/local/ssl \
         --openssldir=/usr/local/ssl \
         shared zlib no-async enable-egd \
-        -Wl,-rpath,/usr/local/ssl/lib && \
-    make -j $(nproc) && \
-    make install && \
-    cd .. && \
+        -Wl,-rpath,/usr/local/ssl/lib; \
+    make -j $(nproc); \
+    make install; \
+    cd ..; \
     rm -rf openssl-$OPENSSL_VERSION openssl-$OPENSSL_VERSION.tar.gz
 
 ENV PKG_CONFIG_PATH /usr/local/ssl/lib/pkgconfig
