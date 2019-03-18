@@ -55,7 +55,7 @@ RUN set -ex; \
     rm -f perl-$PERL_VERSION.tar.gz; \
     cd perl-$PERL_VERSION; \
     ./Configure -des; \
-    make; \
+    make -j $(nproc); \
     make install; \
     cd ..; \
     rm -rf perl-$PERL_VERSION
