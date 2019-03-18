@@ -78,6 +78,8 @@ RUN set -ex; \
     make install_sw; \
     cd ..; \
     rm -rf openssl-$OPENSSL_VERSION; \
+    echo $OPENSSL_DIR/lib > /etc/ld.so.conf.d/openssl-$OPENSSL_VERSION.conf; \
+    ldconfig -v; \
     $OPENSSL_DIR/bin/openssl version -a
 
 ENV PATH $OPENSSL_DIR/bin:$PATH
