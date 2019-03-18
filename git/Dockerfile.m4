@@ -9,7 +9,6 @@ RUN set -ex; \
     yum install -y \
         expat-devel \
         gettext-devel \
-        zlib-devel \
     ; \
     yum clean all
 
