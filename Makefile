@@ -1,7 +1,7 @@
 DIRS = openssl curl python git
 ARCHS = x86_64 i386
 
-all: tag
+all: build tag
 
 build:
 	for dir in $(DIRS) ; do \
