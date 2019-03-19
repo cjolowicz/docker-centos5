@@ -1,7 +1,7 @@
 DIRS = openssl curl python git
 ARCHS = x86_64 i386
 
-all: build tag
+all: tag
 
 build:
 	status=0 ; \
