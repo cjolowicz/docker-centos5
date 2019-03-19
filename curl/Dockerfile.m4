@@ -40,7 +40,7 @@ RUN set -ex; \
     ./configure \
         --with-ssl=$OPENSSL_DIR \
         m4_ifelse(ARCH, `i386', `--host=i686-pc-linux-gnu CFLAGS=-m32'); \
-    make -j $(nproc); \
+    make -j $(grep -c processor /proc/cpuinfo); \
     make install; \
     cd ..; \
     rm -rf curl-$CURL_VERSION; \

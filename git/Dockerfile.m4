@@ -25,7 +25,7 @@ RUN set -ex; \
         --with-openssl=$OPENSSL_DIR \
         --with-curl=/usr/local \
     ; \
-    make -j $(nproc); \
+    make -j $(grep -c processor /proc/cpuinfo); \
     make install; \
     cd ..; \
     rm -rf git-$GIT_VERSION; \

@@ -61,7 +61,7 @@ RUN set -ex; \
     rm -f perl-$PERL_VERSION.tar.gz; \
     cd perl-$PERL_VERSION; \
     ./Configure -des; \
-    make -j $(nproc); \
+    make -j $(grep -c processor /proc/cpuinfo); \
     make install; \
     cd ..; \
     rm -rf perl-$PERL_VERSION
@@ -81,7 +81,7 @@ RUN set -ex; \
         --openssldir=$OPENSSL_DIR \
         shared zlib no-async enable-egd \
         -Wl,-rpath,$OPENSSL_DIR/lib; \
-    make -j $(nproc); \
+    make -j $(grep -c processor /proc/cpuinfo); \
     make install_sw; \
     cd ..; \
     rm -rf openssl-$OPENSSL_VERSION; \
