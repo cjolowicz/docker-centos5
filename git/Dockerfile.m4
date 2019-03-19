@@ -30,5 +30,3 @@ RUN set -ex; \
     cd ..; \
     rm -rf git-$GIT_VERSION; \
     git --version
-
-ENTRYPOINT ["git"]

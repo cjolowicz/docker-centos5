@@ -48,6 +48,3 @@ RUN set -ex; \
 
 ENV PATH /usr/local/bin:$PATH
 ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-
-ENTRYPOINT ["curl"]
-CMD ["--help"]

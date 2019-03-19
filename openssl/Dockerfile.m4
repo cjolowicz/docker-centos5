@@ -91,5 +91,3 @@ RUN set -ex; \
 
 ENV PATH $OPENSSL_DIR/bin:$PATH
 ENV PKG_CONFIG_PATH $OPENSSL_DIR/lib/pkgconfig
-
-ENTRYPOINT ["openssl"]
