@@ -1,4 +1,4 @@
-all: build
+all: tag
 
 build: Dockerfile.m4
 	m4 -P -D ARCH=$(ARCH) -D REPO=$(REPO) Dockerfile.m4 | \
