@@ -11,7 +11,7 @@ build:
 	            status=$$? ; \
 	    done ; \
 	done ; \
-	return $$status
+	exit $$status
 
 tag:
 	status=0 ; \
@@ -21,7 +21,7 @@ tag:
 	            status=$$? ; \
 	    done ; \
 	done ; \
-	return $$status
+	exit $$status
 
 push:
 	status=0 ; \
@@ -31,7 +31,7 @@ push:
 	            status=$$? ; \
 	    done ; \
 	done ; \
-	return $$status
+	exit $$status
 
 login:
 	echo "$(DOCKER_PASSWORD)" | docker login -u $(DOCKER_USERNAME) --password-stdin

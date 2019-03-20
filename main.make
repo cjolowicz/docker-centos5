@@ -9,7 +9,7 @@ tag: build
 	for tag in $(TAGS) ; do \
 	    docker tag $(IMAGE) $(IMAGE):$$tag || status=$$? ; \
 	done ; \
-	return $$status
+	exit $$status
 
 push: tag
 	status=0 ; \
@@ -17,6 +17,6 @@ push: tag
 	for tag in $(TAGS) ; do \
 	    docker push $(IMAGE):$$tag || status=$$? ; \
 	done ; \
-	return $$status
+	exit $$status
 
 .PHONY: all build tag push
